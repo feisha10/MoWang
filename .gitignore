@@ -1,5 +1,7 @@
-/[Ll]ibrary/
-/[Tt]emp/
+/Library/
+/client/game/Library/
+/Temp/
+/client/game/Temp/
 /[Oo]bj/
 /[Bb]uild/
 /[Bb]uilds/
