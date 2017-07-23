@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Log {
-	public static void Debug()
+public class Log :Singleton<Log>{
+	public static void Debug(string msg)
 	{
-		//Debug.Log("111");
-
+		UnityEngine.Debug.Log(msg);
 	}
 }
