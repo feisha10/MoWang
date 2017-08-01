@@ -10,6 +10,8 @@ public class GameStart : MonoBehaviour {
 
 		gameScene = new GameScene();
 		gameScene.Init();
+
+		ConfigManager.Instance.GetCommmonValue("111");
 	
 	}
 	

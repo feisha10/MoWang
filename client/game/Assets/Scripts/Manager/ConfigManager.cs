@@ -6,7 +6,11 @@ using System.IO;
 
 public class ConfigManager:Singleton<ConfigManager> {
 
+    const char SPLIT_FIELD='\t';
+
 	private Dictionary<string, Dictionary<int, ConfigBase>> _allConfigs = new Dictionary<string, Dictionary<int, ConfigBase>>();
+
+    private Dictionary<string, ConfigData> _configs = new Dictionary<string, ConfigData>();
 
     private Dictionary<string, string> _commonValue;
 
@@ -27,6 +31,7 @@ public class ConfigManager:Singleton<ConfigManager> {
 
     public string GetCommmonValue(string key)
     {
+        GetConfig("Common");
 //         if (_commonValue == null)
 //         {
 //             //ConfigData configData;
@@ -63,32 +68,32 @@ public class ConfigManager:Singleton<ConfigManager> {
         return null;
     }
 
-//	public SOBase GetConfig(string url)
-  //  {
-        // if (configs.ContainsKey(url)==false)
-        // {
-        //     if (ConfigDicSource.ContainsKey(url) == false)
-        //         return null;
+    public ConfigData GetConfig(string url)
+   {
+        if (_configs.ContainsKey(url)==false)
+        {
+            TextAsset asset = ResourcesManager.Instance.LoadAsset("Config/"+url) as TextAsset;
 
-        //     if (url == "WordFilter" || url == "WordFilterChat")
-        //     {
-        //         var asset = ConfigControl.ImportNormal(null, ConfigDicSource[url]);
-        //         configs.Add(url, asset);
-        //     }
-        //     else if (url == "Guide" || url == "FightNovice")
-        //     {
-        //         var asset = ConfigControl.ImportXml(null, ConfigDicSource[url]);
-        //         configs.Add(url, asset);
-        //     }
-        //     else
-        //     {
-        //         var asset = ConfigControl.ImportCsv(null, true, ConfigDicSource[url]);
-        //         configs.Add(url, asset);
-        //     }
-        //     ConfigDicSource.Remove(url);
-        // }
-        // return configs[url];
-    //}
+            using(var sr = new StringReader(asset.text))
+            {
+                string line;
+                line = sr.ReadLine();
+                var names = line.Split(SPLIT_FIELD);
+                var configData = new ConfigData();
+                configData.fieldNames = names;
+                for(int i =0;i<names.Length;i++)
+                {
+                    Debug.Log(names[i]);
+                }
+                while((line=sr.ReadLine())!=null)
+                {
+                   // Debug.Log(line);
+                }
+            }
+        }
+        return null;
+        return _configs[url];
+    }
 
 	/// <summary>
     /// 增加对Excel的“Unicode 文本”格式中换行和双引号的解析支持
