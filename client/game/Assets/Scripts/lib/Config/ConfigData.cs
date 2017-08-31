@@ -11,7 +11,7 @@ public class ConfigData :SOBase{
 	public int boolLen = 0;
 	public int floatLen = 0;
 
-	private Dictionary<int,ConfigSheetLine> _dicId;
+	public Dictionary<int,ConfigSheetLine> _dicId;
 	private Dictionary<string,ConfigSheetLine> _dicName;
 
 	public void InitLine(int intlen, int stringlen,int boollen,int floatlen)
