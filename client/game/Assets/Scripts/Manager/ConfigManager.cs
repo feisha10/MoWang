@@ -81,6 +81,7 @@ public class ConfigManager:Singleton<ConfigManager> {
                 var names = line.Split(SPLIT_FIELD);
                 var configData = new ConfigData();
                 configData.fieldNames = names;
+                
                 for(int i =0;i<names.Length;i++)
                 {
                     Debug.Log(names[i]);
